@@ -483,6 +483,14 @@ go.opentelemetry.io/proto/slim/otlp/profiles/v1development v0.3.0 h1:CQvJSldHRUN
 go.opentelemetry.io/proto/slim/otlp/profiles/v1development v0.3.0/go.mod h1:xSQ+mEfJe/GjK1LXEyVOoSI1N9JV9ZI923X5kup43W4=
 go.temporal.io/api v1.63.6-0.20260909222256-20151aa90480 h1:1w2xEZFpL7R9NagEQeWTh7oZmZU3YUJGogusn9/LfCg=
 go.temporal.io/api v1.63.6-0.20260909222256-20151aa90480/go.mod h1:acM0I9WPuYg8W3Pd9jOZvEgi7mRUttUQ4+e7fowKVnM=
+go.temporal.io/api v1.63.7-0.20260930182703-200ed65690e0 h1:MRPTciFxwjnr1td10scPcZEwWgH9xoJPzJnm1Zzw2Ao=
+go.temporal.io/api v1.63.7-0.20260930182703-200ed65690e0/go.mod h1:acM0I9WPuYg8W3Pd9jOZvEgi7mRUttUQ4+e7fowKVnM=
+go.temporal.io/api v1.63.7-0.20260930193619-f87199240612 h1:oGGMOutKYtEEw4x42A+bhSU6Ii2fQQX2HBuxro98I2U=
+go.temporal.io/api v1.63.7-0.20260930193619-f87199240612/go.mod h1:acM0I9WPuYg8W3Pd9jOZvEgi7mRUttUQ4+e7fowKVnM=
+go.temporal.io/api v1.63.7-0.20261002204259-1c070db53866 h1:Kj0uum3/R7i5Yd+2YbUn8mMaqfuskKTICt4RU0gvtBY=
+go.temporal.io/api v1.63.7-0.20261002204259-1c070db53866/go.mod h1:acM0I9WPuYg8W3Pd9jOZvEgi7mRUttUQ4+e7fowKVnM=
+go.temporal.io/api v1.63.7-0.20261005054911-83cc57dcaf70 h1:C7Y0mzRmp908AUeA/E0/AMm8Fys/4OnLqtQ5sx6XZZU=
+go.temporal.io/api v1.63.7-0.20261005054911-83cc57dcaf70/go.mod h1:acM0I9WPuYg8W3Pd9jOZvEgi7mRUttUQ4+e7fowKVnM=
 go.temporal.io/auto-scaled-workers v0.0.0-20260811170210-91f6fe1d10ab h1:99wXW0317BBi49d6xgMdA0EZtvA+xbBUWV4HsTEGEcg=
 go.temporal.io/auto-scaled-workers v0.0.0-20260811170210-91f6fe1d10ab/go.mod h1:hhHijO9XRPIkAflLJJHix61M9FzbRPqk8fSydkcLkqw=
 go.temporal.io/sdk v1.48.0 h1:WDctKDVuh0Z8Nf7euAyqs/EwcPg1JTIIq1Fut8Tq118=
