@@ -194,8 +194,9 @@ func NewStandaloneActivity(
 		},
 		LastAttempt: chasm.NewDataField(ctx, &activitypb.ActivityAttemptState{}),
 		RequestData: chasm.NewDataField(ctx, &activitypb.ActivityRequestData{
-			Input:  request.Input,
-			Header: request.Header,
+			Input:                               request.Input,
+			Header:                              request.Header,
+			PropagatedNexusSerializationContext: request.GetPropagatedNexusSerializationContext(),
 			// Dual-write user_metadata to the legacy ActivityRequestData field so that a
 			// rolled-back binary (which only reads from here) keeps showing it. The
 			// authoritative copy lives on ChasmComponentAttributes.user_metadata; this
@@ -263,14 +264,15 @@ func (a *Activity) GenerateRecordActivityTaskStartedResponse(
 	links := ctx.Links(a)
 
 	return &historyservice.RecordActivityTaskStartedResponse{
-		StartedTime:                 attempt.GetStartedTime(),
-		Attempt:                     attempt.GetCount(),
-		Priority:                    a.GetPriority(),
-		RetryPolicy:                 a.GetRetryPolicy(),
-		ActivityRunId:               key.RunID,
-		WorkflowNamespace:           namespace,
-		HeartbeatDetails:            lastHeartbeat.GetDetails(),
-		CurrentAttemptScheduledTime: a.dispatchTimeForAttempt(attempt),
+		StartedTime:                         attempt.GetStartedTime(),
+		Attempt:                             attempt.GetCount(),
+		Priority:                            a.GetPriority(),
+		RetryPolicy:                         a.GetRetryPolicy(),
+		ActivityRunId:                       key.RunID,
+		WorkflowNamespace:                   namespace,
+		HeartbeatDetails:                    lastHeartbeat.GetDetails(),
+		PropagatedNexusSerializationContext: requestData.GetPropagatedNexusSerializationContext(),
+		CurrentAttemptScheduledTime:         a.dispatchTimeForAttempt(attempt),
 		ScheduledEvent: &historypb.HistoryEvent{
 			EventType: enumspb.EVENT_TYPE_ACTIVITY_TASK_SCHEDULED,
 			EventTime: a.GetScheduleTime(),
