@@ -2853,11 +2853,12 @@ func (ms *MutableStateImpl) addWorkflowExecutionStartedEventForContinueAsNew(
 		Memo:                     command.Memo,
 		SearchAttributes:         command.SearchAttributes,
 		// No need to request eager execution here (for now)
-		RequestEagerExecution: false,
-		CompletionCallbacks:   completionCallbacks,
-		Links:                 links,
-		Priority:              previousExecutionInfo.Priority,
-		TimeSkippingConfig:    tsc,
+		RequestEagerExecution:               false,
+		CompletionCallbacks:                 completionCallbacks,
+		Links:                               links,
+		Priority:                            previousExecutionInfo.Priority,
+		TimeSkippingConfig:                  tsc,
+		PropagatedNexusSerializationContext: previousExecutionInfo.GetPropagatedNexusSerializationContext(),
 	}
 
 	enums.SetDefaultContinueAsNewInitiator(&command.Initiator)
@@ -3103,6 +3104,7 @@ func (ms *MutableStateImpl) ApplyWorkflowExecutionStartedEvent(
 	ms.executionInfo.WorkflowExecutionTimeout = event.GetWorkflowExecutionTimeout()
 	ms.executionInfo.DefaultWorkflowTaskTimeout = event.GetWorkflowTaskTimeout()
 	ms.executionInfo.OriginalExecutionRunId = event.GetOriginalExecutionRunId()
+	ms.executionInfo.PropagatedNexusSerializationContext = event.GetPropagatedNexusSerializationContext()
 
 	ms.approximateSize -= ms.executionState.Size()
 	ms.executionState.FirstExecutionRunId = event.GetFirstExecutionRunId()
