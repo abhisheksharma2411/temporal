@@ -232,7 +232,7 @@ func (u *Updater) ApplyRequest(
 // validateCallbacks rejects completion callbacks that would breach the execution's limits
 // before the Update reaches the worker: once the worker has accepted it, its callbacks are
 // attached without further checks. Callbacks of other Updates still in flight are reserved
-// against the limits; see api.InFlightUpdateCallbacks.
+// against the limits; see update.Registry.InFlightCallbacks.
 func validateCallbacks(
 	ctx context.Context,
 	updateReg update.Registry,
@@ -250,7 +250,7 @@ func validateCallbacks(
 		return nil
 	}
 
-	inFlight, err := api.InFlightUpdateCallbacks(updateReg)
+	inFlight, err := updateReg.InFlightCallbacks()
 	if err != nil {
 		return err
 	}
