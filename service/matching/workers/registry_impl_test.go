@@ -986,7 +986,10 @@ func TestWorkerConfigEvent(t *testing.T) {
 		return attrs
 	}
 
-	require.Len(t, eventLogger.records, 1)
+	// worker_config (from upsert) + worker_metrics (from emit loop)
+	require.Len(t, eventLogger.records, 2)
+
+	// worker_config
 	require.Equal(t, "worker_config", eventLogger.records[0].EventName())
 	configAttrs := toAttrs(eventLogger.records[0])
 	require.Equal(t, "test-ns", configAttrs["namespace"].AsString())
@@ -995,6 +998,19 @@ func TestWorkerConfigEvent(t *testing.T) {
 	require.Equal(t, "go", configAttrs["runtime_type"].AsString())
 	require.Equal(t, "linux", configAttrs["os"].AsString())
 	require.Equal(t, "amd64", configAttrs["architecture"].AsString())
+
+	// worker_metrics
+	require.Equal(t, "worker_metrics", eventLogger.records[1].EventName())
+	metricsAttrs := toAttrs(eventLogger.records[1])
+	require.Equal(t, "test-ns", metricsAttrs["namespace"].AsString())
+	require.Equal(t, "my-queue", metricsAttrs["task_queue"].AsString())
+	require.Equal(t, "go-worker", metricsAttrs["worker_instance_key"].AsString())
+	statsJSON := metricsAttrs["task_type_stats"].AsString()
+	require.Contains(t, statsJSON, `"workflow"`)
+	require.Contains(t, statsJSON, `"activity"`)
+	require.Contains(t, statsJSON, `"total_slots"`)
+	require.Contains(t, statsJSON, `"used_slots"`)
+	require.Contains(t, statsJSON, `"poller_count"`)
 }
 
 func TestWorkerConfigEventOnlyOnFirstHeartbeat(t *testing.T) {

@@ -250,8 +250,9 @@ func newRegistryImpl(params RegistryParams) *registryImpl {
 		metricsHandler:     params.MetricsHandler,
 		eventLogger: params.EventLogger,
 		metricsEmitter: &workerMetricsEmitter{
-			handler: params.MetricsHandler,
-			config:  params.MetricsConfig,
+			handler:     params.MetricsHandler,
+			config:      params.MetricsConfig,
+			eventLogger: params.EventLogger,
 		},
 	}
 
